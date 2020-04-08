@@ -13,7 +13,24 @@ func handleFprintf(err error,n int)  {
 	}
 	fmt.Printf("%d bytes written\n",n)
 }
-
+func respondBack(writer http.ResponseWriter) int {
+	data,err := json.MarshalIndent(books.BOOKS.Books[len(books.BOOKS.Books)-1],"","  ")
+	if err!=nil{
+		fmt.Println(err)
+		writer.WriteHeader(http.StatusInternalServerError)
+		n,err := fmt.Fprintf(writer,"Error occurred")
+		handleFprintf(err,n)
+		return 0
+	}else{
+		writer.Header().Add("Content-Type", "application/json")
+		writer.WriteHeader(http.StatusCreated)
+		n,err := writer.Write(data)
+		if err != nil{
+			panic(err)
+		}
+		return n
+	}
+}
 func HandlePost(writer http.ResponseWriter,r *http.Request)  {
 	var newBook books.Book
 	reqBody,err := ioutil.ReadAll(r.Body)
@@ -29,14 +46,9 @@ func HandlePost(writer http.ResponseWriter,r *http.Request)  {
 			n,err := fmt.Fprintf(writer,"Please enter information according to format")
 			handleFprintf(err,n)
 		}else {
-
-			writer.WriteHeader(http.StatusCreated)
 			books.AddBook(newBook)
 			books.UpdateID()
-			err = json.NewEncoder(writer).Encode(books.BOOKS.Books[len(books.BOOKS.Books)-1])
-			if err!=nil{
-				fmt.Println(err)
-			}
+			respondBack(writer)
 		}
 
 	}

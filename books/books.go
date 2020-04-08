@@ -18,8 +18,13 @@ type Books struct {
 	Books []Book 
 }
 
+type Error struct {
+	Error string `json:"error"`
+}
+
 var Failed bool = false
 var BOOKS Books
+var ERROR Error
 func readFile(fileName string) *os.File {
 	jsonFile,err := os.Open(fileName)
 	if err!= nil{

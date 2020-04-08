@@ -11,10 +11,15 @@ import (
 
 func writeData(writer http.ResponseWriter,byteArray []byte,failed bool) int{
 	var data []byte
+	var err error
 	if !failed{
 		data = byteArray
 	}else {
-		data = []byte("Error occurred")
+		books.ERROR.Error = "Error occurred"
+		data,err = json.MarshalIndent(books.ERROR,"","  ")
+		if err!=nil{
+			fmt.Println(err)
+		}
 	}
 	n,err := writer.Write(data)
 	if err != nil{
@@ -94,7 +99,12 @@ func checkByPage(err error,flag int,writer http.ResponseWriter,booksJson []byte)
 		}
 	}else{
 		writer.WriteHeader(http.StatusBadRequest)
-		writeData(writer,[]byte(data),false)
+		books.ERROR.Error = data
+		message,err := json.MarshalIndent(books.ERROR,"","  ")
+		if err!=nil{
+			fmt.Println(err)
+		}
+		writeData(writer,message,false)
 	}
 
 }
