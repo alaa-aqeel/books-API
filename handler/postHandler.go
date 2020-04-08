@@ -47,7 +47,6 @@ func HandlePost(writer http.ResponseWriter,r *http.Request)  {
 			handleFprintf(err,n)
 		}else {
 			books.AddBook(newBook)
-			books.UpdateID()
 			respondBack(writer)
 		}
 

@@ -54,7 +54,9 @@ func UpdateID()  {
 	}
 }
 func AddBook(book Book)  {
+	book.Id = int64(len(BOOKS.Books)+1)
 	BOOKS.Books = append(BOOKS.Books,book)
+
 }
 func Run() {
 	jsonFile := readFile("books.json")

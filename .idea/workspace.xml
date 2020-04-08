@@ -4,9 +4,7 @@
     <list default="true" id="172301e7-79c9-4327-be86-9d6dc20a5208" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/books/books.go" beforeDir="false" afterPath="$PROJECT_DIR$/books/books.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/getHandlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/getHandlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/byPageRange.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/byPageRange.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/postHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/postHandler.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
