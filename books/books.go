@@ -58,6 +58,32 @@ func AddBook(book Book)  {
 	BOOKS.Books = append(BOOKS.Books,book)
 
 }
+
+func UpdateABook(book Book,ID int64) Book{
+	var foundIndex int
+	for i := 0; i < len(BOOKS.Books); i++ {
+		if ID == BOOKS.Books[i].Id {
+			if book.Language != "" {
+				BOOKS.Books[i].Language = book.Language
+			}
+			if book.Author != ""{
+				BOOKS.Books[i].Author = book.Author
+			}
+			if book.Title != "" {
+				BOOKS.Books[i].Title = book.Title
+			}
+			if book.Link != "" {
+				BOOKS.Books[i].Link = book.Link
+			}
+			if book.Pages > 0 {
+				BOOKS.Books[i].Pages = book.Pages
+			}
+			foundIndex = i
+			break
+		}
+	}
+	return BOOKS.Books[foundIndex]
+}
 func Run() {
 	jsonFile := readFile("books.json")
 	if jsonFile !=nil{
