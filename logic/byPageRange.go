@@ -8,8 +8,8 @@ import (
 func FindByPageRange(min string,max string) (books.Books,int){
 	var foundBooks books.Books
 	var flag int = 0
-	minPage,err1 := strconv.ParseInt(min, 10, 16)
-	maxPage,err2 := strconv.ParseInt(max, 10, 16)
+	minPage,err1 := strconv.ParseInt(min, 10, 64)
+	maxPage,err2 := strconv.ParseInt(max, 10, 64)
 	if err1!=nil || err2!=nil{
 		flag = 1
 	}else if minPage<0 || maxPage<0{

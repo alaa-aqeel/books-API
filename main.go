@@ -16,6 +16,7 @@ func handleRequest()  {
 	myRouter.HandleFunc("/author/{author}",handler.HandleByAuthor).Methods("GET")
 	myRouter.HandleFunc("/page/min/{min}/max/{max}",handler.HandleByPageRange).Methods("GET")
 	myRouter.HandleFunc("/lang/{lang}",handler.HandleByLanguage).Methods("GET")
+	myRouter.HandleFunc("/id/{id}",handler.HandleByID).Methods("GET")
 	myRouter.HandleFunc("/book",handler.HandlePost).Methods("POST")
 	log.Fatal(http.ListenAndServe(":8080",myRouter)) // run server
 

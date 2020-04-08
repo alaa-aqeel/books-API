@@ -7,7 +7,7 @@ import (
 	"os"
 )
 type Book struct {
-	Id  int  `json:"id"`
+	Id  int64  `json:"id"`
 	Author string `json:"author"`
 	Language string `json:"language"`
 	Link string `json:"link"`
@@ -50,7 +50,7 @@ func parseBooks(fp *os.File)  {
 }
 func UpdateID()  {
 	for i:=0;i< len(BOOKS.Books);i++{
-		BOOKS.Books[i].Id = i+1
+		BOOKS.Books[i].Id = int64(i) +1
 	}
 }
 func AddBook(book Book)  {

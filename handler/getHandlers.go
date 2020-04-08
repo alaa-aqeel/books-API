@@ -9,36 +9,39 @@ import (
 	"net/http"
 )
 
-func writeData(writer http.ResponseWriter,byteArray []byte,failed bool) int{
+func writeData(writer http.ResponseWriter,byteArray []byte, failed bool,errMessage string) int{
 	var data []byte
 	var err error
-	if !failed{
+	if !failed && !books.Failed{
 		data = byteArray
 	}else {
-		books.ERROR.Error = "Error occurred"
+		books.ERROR.Error = errMessage
 		data,err = json.MarshalIndent(books.ERROR,"","  ")
 		if err!=nil{
 			fmt.Println(err)
+			writer.Header().Add("Content-Type", "text/plain")
+			data = []byte("Error occurred while processing")
+			writer.WriteHeader(500)
 		}
 	}
 	n,err := writer.Write(data)
 	if err != nil{
-		panic(err)
+		fmt.Println(err)
 	}
 	return n
 }
 
-func checkErrSetHeader(err error,writer http.ResponseWriter) (http.ResponseWriter,bool) {
+func checkErrSetHeader(err error,writer http.ResponseWriter,code int) (http.ResponseWriter,bool) {
 	var failed = false
 	writer.Header().Add("Content-Type", "application/json")
 	if err!=nil || books.Failed{
 		if err!=nil{
 			fmt.Println(err)
 		}
-		writer.WriteHeader(http.StatusInternalServerError)
+		writer.WriteHeader(500)
 		failed = true
 	}else {
-		writer.WriteHeader(http.StatusOK)
+		writer.WriteHeader(code)
 	}
 	return writer,failed
 
@@ -46,8 +49,8 @@ func checkErrSetHeader(err error,writer http.ResponseWriter) (http.ResponseWrite
 func AllBooks(writer http.ResponseWriter,r *http.Request)  {
 	fmt.Println("All Books Endpoint Hit")
 	booksJson,err := json.MarshalIndent(books.BOOKS,"","  ")
-	writer,failed := checkErrSetHeader(err,writer)
-	writeData(writer,booksJson,failed)
+	writer,failed := checkErrSetHeader(err,writer,200)
+	writeData(writer,booksJson,failed,"Error occurred while processing")
 }
 
 func HandleHome(writer http.ResponseWriter,r *http.Request) {
@@ -63,8 +66,8 @@ func HandleByTitle(writer http.ResponseWriter,r *http.Request)  {
 	vars:= mux.Vars(r)
 	keyword:=  vars["title"]
 	booksJson,err := json.MarshalIndent(logic.FindByTitleKeyword(keyword),"","  ")
-	writer,failed := checkErrSetHeader(err,writer)
-	writeData(writer,booksJson,failed)
+	writer,failed := checkErrSetHeader(err,writer,200)
+	writeData(writer,booksJson,failed,"Error occurred while processing")
 }
 
 func HandleByAuthor(writer http.ResponseWriter,r *http.Request)  {
@@ -72,15 +75,15 @@ func HandleByAuthor(writer http.ResponseWriter,r *http.Request)  {
 	vars:= mux.Vars(r)
 	keyword:=  vars["author"]
 	booksJson,err := json.MarshalIndent(logic.FindByAuthorKeyword(keyword),"","  ")
-	writer,failed := checkErrSetHeader(err,writer)
-	writeData(writer,booksJson,failed)
+	writer,failed := checkErrSetHeader(err,writer,200)
+	writeData(writer,booksJson,failed,"Error occurred while processing")
 }
 
-func checkByPage(err error,flag int,writer http.ResponseWriter,booksJson []byte){
+func checkByPage(flag int,writer http.ResponseWriter,foundBooks books.Books){
 	validInput := false
 	var data string
 	if flag==1{
-		data = "Please enter integer number for page range"
+		data = "Please enter valid integer number for page range"
 	}else if flag ==2{
 		data = "Number of pages should be positive integer"
 	}else if flag==3{
@@ -90,21 +93,14 @@ func checkByPage(err error,flag int,writer http.ResponseWriter,booksJson []byte)
 	}
 	writer.Header().Add("Content-Type", "application/json")
 	if validInput{
-		if err==nil && !books.Failed{
-			writer.WriteHeader(http.StatusOK)
-			writeData(writer,booksJson,false)
-		}else{
-			writer.WriteHeader(http.StatusInternalServerError)
-			writeData(writer,[]byte("Error occurred"),true)
-		}
+		booksJson,err := json.MarshalIndent(foundBooks,"","  ")
+		writer,failed :=checkErrSetHeader(err,writer,200)
+		writeData(writer,booksJson,failed,"Error occurred while processing")
 	}else{
-		writer.WriteHeader(http.StatusBadRequest)
 		books.ERROR.Error = data
 		message,err := json.MarshalIndent(books.ERROR,"","  ")
-		if err!=nil{
-			fmt.Println(err)
-		}
-		writeData(writer,message,false)
+		writer,failed:= checkErrSetHeader(err,writer,400)
+		writeData(writer,message,failed,"Error occurred while processing")
 	}
 
 }
@@ -113,9 +109,8 @@ func HandleByPageRange(writer http.ResponseWriter,r *http.Request)  {
 	vars:= mux.Vars(r)
 	min:=  vars["min"]
 	max:= vars["max"]
-	data,flag:=logic.FindByPageRange(min,max)
-	booksJson,err := json.MarshalIndent(data,"","  ")
-	checkByPage(err,flag,writer,booksJson)
+	foundBook,flag:=logic.FindByPageRange(min,max)
+	checkByPage(flag,writer,foundBook)
 
 }
 
@@ -124,7 +119,25 @@ func HandleByLanguage(writer http.ResponseWriter,r *http.Request){
 	vars:= mux.Vars(r)
 	keyword :=  vars["lang"]
 	booksJson,err := json.MarshalIndent(logic.FindByLanguage(keyword),"","  ")
-	writer,failed := checkErrSetHeader(err,writer)
-	writeData(writer,booksJson,failed)
+	writer,failed := checkErrSetHeader(err,writer,200)
+	writeData(writer,booksJson,failed,"Error occurred while processing")
 
+}
+
+func HandleByID(writer http.ResponseWriter,r *http.Request)  {
+	fmt.Println("Search By ID Endpoint Hit")
+	vars:= mux.Vars(r)
+	id :=  vars["id"]
+	writer.Header().Add("Content-Type", "application/json")
+	data,failed := logic.FindByID(id)
+	if failed{
+		books.ERROR.Error = "Please enter valid integer for ID"
+		message,err := json.MarshalIndent(books.ERROR,"","  ")
+		writer,failed := checkErrSetHeader(err,writer,400)
+		writeData(writer,message,failed,"Error occurred while processing")
+	}else{
+		message,err := json.MarshalIndent(data,"","  ")
+		writer,failed := checkErrSetHeader(err,writer,200)
+		writeData(writer,message,failed,"Error occurred while processing")
+	}
 }
