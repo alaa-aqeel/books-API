@@ -1,6 +1,7 @@
 package handler
 import (
 	"../books"
+	"../logic"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -13,13 +14,16 @@ func HandleFprintf(err error,n int)  {
 	}
 	fmt.Printf("%d bytes written\n",n)
 }
+func PrintErr(writer http.ResponseWriter,statusCode int, errMessage string){
+	writer.WriteHeader(statusCode)
+	n,err := fmt.Fprintf(writer,errMessage)
+	HandleFprintf(err,n)
+}
 func respondBackPost(writer http.ResponseWriter) int {
 	data,err := json.MarshalIndent(books.BOOKS.Books[len(books.BOOKS.Books)-1],"","  ")
 	if err!=nil{
 		fmt.Println(err)
-		writer.WriteHeader(http.StatusInternalServerError)
-		n,err := fmt.Fprintf(writer,"Error occurred")
-		HandleFprintf(err,n)
+		PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
 		return 0
 	}else{
 		writer.Header().Add("Content-Type", "application/json")
@@ -34,25 +38,23 @@ func respondBackPost(writer http.ResponseWriter) int {
 func HandlePost(writer http.ResponseWriter,r *http.Request)  {
 	var newBook books.Book
 	if books.Failed{
-		writer.WriteHeader(http.StatusInternalServerError)
-		n,err := fmt.Fprintf(writer,"Error occurred")
-		HandleFprintf(err,n)
+		PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
 	}else{
 		reqBody,err := ioutil.ReadAll(r.Body)
 		if err!=nil{
 			fmt.Println(err)
-			writer.WriteHeader(http.StatusInternalServerError)
-			n,err := fmt.Fprintf(writer,"Error occurred")
-			HandleFprintf(err,n)
+			PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
 		}else{
 			err := json.Unmarshal(reqBody,&newBook)
 			if err!=nil{
-				writer.WriteHeader(http.StatusBadRequest)
-				n,err := fmt.Fprintf(writer,"Please enter information according to format")
-				HandleFprintf(err,n)
+				PrintErr(writer,http.StatusBadRequest,"Please enter information according to format")
 			}else {
-				books.AddBook(newBook)
-				respondBackPost(writer)
+				failed := logic.AddABook(newBook)
+				if failed{
+					PrintErr(writer,http.StatusBadRequest,"Please enter valid integer for number of pages")
+				}else{
+					respondBackPost(writer)
+				}
 			}
 
 		}
