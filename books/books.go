@@ -56,6 +56,7 @@ func UpdateID()  {
 func AddBook(book Book)  {
 	book.Id = int64(len(BOOKS.Books)+1)
 	BOOKS.Books = append(BOOKS.Books,book)
+	fmt.Println("New Book with ID:",book.Id,"added")
 
 }
 
@@ -79,10 +80,24 @@ func UpdateABook(book Book,ID int64) Book{
 				BOOKS.Books[i].Pages = book.Pages
 			}
 			foundIndex = i
+			fmt.Println("Book with ID:",BOOKS.Books[i].Id,"updated")
 			break
 		}
 	}
 	return BOOKS.Books[foundIndex]
+}
+
+func DeleteBook(id int64) bool {
+	found := false
+	for i:=0;i< len(BOOKS.Books);i++{
+		if id == BOOKS.Books[i].Id{
+			fmt.Println("Book with ID:",BOOKS.Books[i].Id,"deleted")
+			BOOKS.Books = append(BOOKS.Books[:i],BOOKS.Books[i+1:]...)
+			found = true
+			break
+		}
+	}
+	return found
 }
 func Run() {
 	jsonFile := readFile("books.json")

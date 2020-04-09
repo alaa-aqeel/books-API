@@ -18,7 +18,8 @@ func handleRequest()  {
 	myRouter.HandleFunc("/lang/{lang}",handler.HandleByLanguage).Methods("GET")
 	myRouter.HandleFunc("/id/{id}",handler.HandleByID).Methods("GET")
 	myRouter.HandleFunc("/book",handler.HandlePost).Methods("POST")
-	myRouter.HandleFunc("/book/id/{id}",handler.HandlePatch).Methods("PATCH")
+	myRouter.HandleFunc("/id/{id}",handler.HandlePatch).Methods("PATCH")
+	myRouter.HandleFunc("/id/{id}",handler.HandleDelete).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8080",myRouter)) // run server
 
 }
