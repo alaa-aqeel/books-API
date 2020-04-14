@@ -1,13 +1,14 @@
 package logic
 
 import (
-	"../books"
+	"../data"
+	"../template"
 	"fmt"
 	"strconv"
 )
 
-func FindByID(id string) (books.Books,bool) {
-	var foundBook books.Books
+func FindByID(id string) (template.Books,bool) {
+	var foundBook template.Books
 	failed := false
 	ID,err := strconv.ParseInt(id, 10, 64)
 	if err!=nil{
@@ -16,9 +17,9 @@ func FindByID(id string) (books.Books,bool) {
 	} else if ID<=0{
 		failed = true
 	}else{
-		for i:=0;i<len(books.BOOKS.Books);i++{
-			if ID == books.BOOKS.Books[i].Id{
-				foundBook.Books = append(foundBook.Books,books.BOOKS.Books[i])
+		for i:=0;i<len(data.BOOKS.Books);i++{
+			if ID == data.BOOKS.Books[i].Id{
+				foundBook.Books = append(foundBook.Books, data.BOOKS.Books[i])
 				break
 			}
 		}

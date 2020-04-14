@@ -1,11 +1,12 @@
 package handler
 import (
-	"../books"
+	"../template"
 	"../logic"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"../data"
 )
 
 func HandleFprintf(err error,n int)  {
@@ -20,7 +21,7 @@ func PrintErr(writer http.ResponseWriter,statusCode int, errMessage string){
 	HandleFprintf(err,n)
 }
 func respondBackPost(writer http.ResponseWriter) int {
-	data,err := json.MarshalIndent(books.BOOKS.Books[len(books.BOOKS.Books)-1],"","  ")
+	toSend,err := json.MarshalIndent(data.BOOKS.Books[len(data.BOOKS.Books)-1],"","  ")
 	if err!=nil{
 		fmt.Println(err)
 		PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
@@ -28,7 +29,7 @@ func respondBackPost(writer http.ResponseWriter) int {
 	}else{
 		writer.Header().Add("Content-Type", "application/json")
 		writer.WriteHeader(http.StatusCreated)
-		n,err := writer.Write(data)
+		n,err := writer.Write(toSend)
 		if err != nil{
 			fmt.Println(err)
 		}
@@ -36,8 +37,8 @@ func respondBackPost(writer http.ResponseWriter) int {
 	}
 }
 func HandlePost(writer http.ResponseWriter,r *http.Request)  {
-	var newBook books.Book
-	if books.Failed{
+	var newBook template.Book
+	if data.Failed{
 		PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
 	}else{
 		reqBody,err := ioutil.ReadAll(r.Body)

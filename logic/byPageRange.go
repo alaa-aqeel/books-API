@@ -1,12 +1,13 @@
 package logic
 
 import (
-	"../books"
+	"../template"
 	"strconv"
+	"../data"
 )
 
-func FindByPageRange(min string,max string) (books.Books,int){
-	var foundBooks books.Books
+func FindByPageRange(min string,max string) (template.Books,int){
+	var foundBooks template.Books
 	var flag int = 0
 	minPage,err1 := strconv.ParseInt(min, 10, 64)
 	maxPage,err2 := strconv.ParseInt(max, 10, 64)
@@ -17,8 +18,8 @@ func FindByPageRange(min string,max string) (books.Books,int){
 	}else if minPage>maxPage{
 		flag = 3
 	}else {
-		for i := 0; i < len(books.BOOKS.Books); i++ {
-			book := books.BOOKS.Books[i]
+		for i := 0; i < len(data.BOOKS.Books); i++ {
+			book := data.BOOKS.Books[i]
 			if book.Pages>=minPage && book.Pages<=maxPage {
 				foundBooks.Books = append(foundBooks.Books, book)
 			}

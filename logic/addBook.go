@@ -1,11 +1,12 @@
 package logic
 
-import "../books"
+import "../data"
+import "../template"
 
-func AddABook(newBook books.Book) bool {
+func AddABook(newBook template.Book) bool {
 	failed := false
 	if newBook.Pages>=0{
-		books.AddBook(newBook)
+		data.AddBook(newBook)
 	}else{
 		failed = true
 	}

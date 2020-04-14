@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"../books"
+	"../data"
 	"../logic"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -10,7 +10,7 @@ import (
 
 
 func HandleDelete(writer http.ResponseWriter,r *http.Request){
-	if books.Failed{
+	if data.Failed{
 		PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
 	}else{
 		vars:= mux.Vars(r)

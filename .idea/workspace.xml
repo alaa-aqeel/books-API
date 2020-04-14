@@ -2,11 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="172301e7-79c9-4327-be86-9d6dc20a5208" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/handler/deleteHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logic/deleteBook.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/addBook.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/deleteBook.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/updateBook.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/books.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/response.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/books/books.go" beforeDir="false" afterPath="$PROJECT_DIR$/books/books.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/books/books.go" beforeDir="false" afterPath="$PROJECT_DIR$/data/setup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/deleteHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/deleteHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/getHandlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/getHandlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/patchHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/patchHandler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/postHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/postHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logic/addBook.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/addBook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/allBooks.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/byAuthor.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/byAuthor.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/byID.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/byID.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/byLanguage.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/byLanguage.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/byPageRange.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/byPageRange.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/byTitle.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/byTitle.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/deleteBook.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/deleteBook.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/updateBook.go" beforeDir="false" afterPath="$PROJECT_DIR$/logic/updateBook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,6 +60,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\USER\go\sth" />
+      <recent name="C:\Users\USER\go\sth\handler\template" />
+      <recent name="C:\Users\USER\go\sth\handler" />
+      <recent name="C:\Users\USER\go\sth\data" />
       <recent name="C:\Users\USER\go\sth\books" />
     </key>
   </component>
@@ -80,21 +99,21 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="393" y="7" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586366931643" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1586423267667">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1586884437030">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586423267667" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1586423267667">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586884437030" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1586884437030">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586423267667" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1586423267667">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586884437030" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1586884437030">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586423267667" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1586423267667">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586884437030" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1586884437030">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586423267667" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586884437030" />
   </component>
 </project>

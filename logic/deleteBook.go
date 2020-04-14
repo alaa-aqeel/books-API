@@ -3,7 +3,7 @@ package logic
 import (
 	"fmt"
 	"strconv"
-	"../books"
+	"../data"
 )
 
 func DeleteABook(id string) (bool,bool) {
@@ -13,10 +13,10 @@ func DeleteABook(id string) (bool,bool) {
 	if err!=nil{
 		fmt.Println(err)
 		failed = true
-	}else if ID<=0{
+	}else if ID<=0 || ID > int64(len(data.BOOKS.Books)){
 		failed = true
 	}else{
-		found = books.DeleteBook(ID)
+		found = data.DeleteBook(ID)
 	}
 	return failed,found
 }

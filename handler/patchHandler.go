@@ -1,21 +1,22 @@
 package handler
 
 import (
-	"../books"
+	"../template"
 	"../logic"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
+	"../data"
 )
 
-func respondBackPatch(writer http.ResponseWriter,failed bool,theBook books.Books) int{
+func respondBackPatch(writer http.ResponseWriter,failed bool,theBook template.Books) int{
 	if failed{
 		PrintErr(writer,http.StatusBadRequest,"Please enter a valid integer as ID")
 		return 0
 	}else{
-		data,err := json.MarshalIndent(theBook,"","  ")
+		toSend,err := json.MarshalIndent(theBook,"","  ")
 		if err!=nil{
 			fmt.Println(err)
 			PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
@@ -23,7 +24,7 @@ func respondBackPatch(writer http.ResponseWriter,failed bool,theBook books.Books
 		}else{
 			writer.Header().Add("Content-Type", "application/json")
 			writer.WriteHeader(http.StatusOK)
-			n,err := writer.Write(data)
+			n,err := writer.Write(toSend)
 			if err != nil{
 				fmt.Println(err)
 			}
@@ -33,8 +34,8 @@ func respondBackPatch(writer http.ResponseWriter,failed bool,theBook books.Books
 
 }
 func HandlePatch(writer http.ResponseWriter,r *http.Request)  {
-	var newBook books.Book
-	if books.Failed{
+	var newBook template.Book
+	if data.Failed{
 		PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
 	}else{
 		vars:= mux.Vars(r)
