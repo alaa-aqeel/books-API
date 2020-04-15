@@ -78,7 +78,7 @@ GET http://localhost:8080/title={title}
 | ------------------------ | ------------------- | ------ |
 | title                    | part of  book title | String |
 
-*** ordering of letters in parameter should be same as the book title
+*** ordering of letters in parameter value should be same as the book title
 
 ### Sample request
 
@@ -118,7 +118,7 @@ GET http://localhost:8080/author={author}
 | ------------------------ | -------------------------- | ------ |
 | author                   | part of book's author name | String |
 
-*** ordering of letters in parameter should be same as the book's author name
+*** ordering of letters in parameter value should be same as the book's author name
 
 ### Sample request
 
@@ -154,11 +154,11 @@ GET http://localhost:8080/lang={language}
 
 ##### Request String Parameters
 
-| Request String Parameters | Description      | Type   |
+| Request String Parameter  | Description      | Type   |
 | ------------------------- | ---------------- | ------ |
-| lang                      | language of book | String |
+| lang                      | part of book language | String |
 
-*** ordering of letters in parameter should be same as the book language
+*** ordering of letters in parameter value should be same as the book language
 
 ### Sample request
 
@@ -194,7 +194,7 @@ GET http://localhost:8080/id={id}
 
 ##### Request String Parameters
 
-| Request String Parameters | Description | Type    |
+| Request String Parameter | Description | Type    |
 | ------------------------- | ----------- | ------- |
 | id                        | id of book  | integer |
 
@@ -347,8 +347,7 @@ PATCH http://localhost:8080/id=103
     "title": "Things fall apart"
 }
 ```
-
-
+*** only passed fields will be updated.
 
 ### Delete a book
 
@@ -390,6 +389,7 @@ Book with id: 103 is deleted
 - negative number or zero entered as book ID
 - invalid number of pages for page range
 - minimum page number exceed maximum page number
+- book id does not exist
 
 500 : error occurred while processing
 
