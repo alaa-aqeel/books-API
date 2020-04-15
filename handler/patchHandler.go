@@ -11,7 +11,7 @@ import (
 	"../data"
 )
 
-func respondBackPatch(writer http.ResponseWriter,failed bool,theBook template.Books) int{
+func respondBackPatch(writer http.ResponseWriter,failed bool,theBook template.Book) int{
 	if failed{
 		PrintErr(writer,http.StatusBadRequest,"Please enter a valid integer as ID")
 		return 0

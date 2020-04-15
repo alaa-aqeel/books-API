@@ -7,9 +7,9 @@ import (
 	"strconv"
 )
 
-func UpdateBook(id string,aBook template.Book) (template.Books,bool){
+func UpdateBook(id string,aBook template.Book) (template.Book,bool){
 	failed := false
-	var result template.Books
+	var result template.Book
 	ID,err := strconv.ParseInt(id, 10, 64)
 	if err!=nil{
 		fmt.Println(err)
@@ -18,7 +18,7 @@ func UpdateBook(id string,aBook template.Book) (template.Books,bool){
 		failed = true
 	}else{
 				foundBook:= data.UpdateABook(aBook,ID)
-				result.Books = append(result.Books,foundBook)
+				result = foundBook
 	}
 	return result,failed
 }
