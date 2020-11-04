@@ -9,7 +9,7 @@ Created to practice Go programming as starting point.
 
 original data : https://github.com/benoitvallon/100-best-books/blob/master/books.json
 
-***currently used data has some modifications
+* currently used data has some modifications
 
 ## Data
 
@@ -79,7 +79,7 @@ GET http://localhost:8080/title={title}
 | ------------------------ | ------------------- | ------ |
 | title                    | part of  book title | String |
 
-*** ordering of letters in parameter value should be same as the book title
+* ordering of letters in parameter value should be same as the book title
 
 ### Sample request
 
@@ -119,7 +119,7 @@ GET http://localhost:8080/author={author}
 | ------------------------ | -------------------------- | ------ |
 | author                   | part of book's author name | String |
 
-*** ordering of letters in parameter value should be same as the book's author name
+* ordering of letters in parameter value should be same as the book's author name
 
 ### Sample request
 
@@ -159,7 +159,7 @@ GET http://localhost:8080/lang={language}
 | ------------------------- | ---------------- | ------ |
 | lang                      | part of book language | String |
 
-*** ordering of letters in parameter value should be same as the book language
+* ordering of letters in parameter value should be same as the book language
 
 ### Sample request
 
@@ -199,7 +199,7 @@ GET http://localhost:8080/id={id}
 | ------------------------- | ----------- | ------- |
 | id                        | id of book  | integer |
 
-*** id parameter value should be starting from 1
+* id parameter value should be starting from 1
 
 ### Sample request
 
@@ -240,9 +240,9 @@ GET http://localhost:8080/page/min={min}&max={max}
 | min                      | minimum number of pages in the book | integer |
 | max                      | maximum number of pages in the book | integer |
 
-*** both parameter value should be starting from 1
+* both parameter value should be starting from 1
 
-*** minimum pages should not exceed maximum pages
+* minimum pages should not exceed maximum pages
 
 ### Sample request
 
@@ -319,7 +319,7 @@ PATCH http://localhost:8080/id={id}
 | ------------------------ | ----------- | ------- |
 | id                       | id of book  | integer |
 
-*** id parameter value should exist in the system
+* id parameter value should exist in the system
 
 ### Sample request
 
@@ -348,7 +348,7 @@ PATCH http://localhost:8080/id=103
     "title": "Things fall apart"
 }
 ```
-*** only passed fields will be updated.
+* only passed fields will be updated.
 
 ### Delete a book
 
@@ -362,7 +362,7 @@ DELETE http://localhost:8080/id={id}
 | ------------------------ | ----------- | ------- |
 | id                       | id of book  | integer |
 
-*** id parameter value should exist in the system
+* id parameter value should exist in the system
 
 ### Sample request
 
@@ -394,7 +394,7 @@ Book with id: 103 is deleted
 
 500 : error occurred while processing
 
-*** error details will be returned
+* error details will be returned
 
 
 
