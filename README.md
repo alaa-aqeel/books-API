@@ -1,8 +1,9 @@
 # books API
 
 Created to practice Go programming as starting point.
-
-![Golang: Create a Web-View App for any platform - Reza Torkaman ...](https://miro.medium.com/max/3000/1*30aoNxlSnaYrLhBT0O1lzw.png)
+<p align="center">
+<img height="450" src="https://miro.medium.com/max/3000/1*30aoNxlSnaYrLhBT0O1lzw.png" alt="Go Go Go"/>
+</p>
 
 ## Data source
 
