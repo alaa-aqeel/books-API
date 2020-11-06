@@ -1,7 +1,7 @@
 package template
 
 type Book struct {
-	Id  int64  `json:"_id,omitempty"`
+	Id  int64  `json:"id,omitempty"`
 	Author string `json:"author,omitempty"`
 	Language string `json:"language,omitempty"`
 	Link string `json:"link,omitempty"`
