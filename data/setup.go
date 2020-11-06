@@ -4,18 +4,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"os"
 	"../template"
 	"path/filepath"
+	"os"
 )
 
-var Failed bool = false
 var BOOKS template.Books
+
 func readFile(fileName string) *os.File {
 	jsonFile,err := os.Open(fileName)
-	if err!= nil{
+	if err!=nil{
 		fmt.Println(err)
-		Failed = true
 		defer jsonFile.Close()
 		return nil
 	}else{
@@ -24,14 +23,15 @@ func readFile(fileName string) *os.File {
 	}
 }
 
-func parseBooks(fp *os.File)  {
+func parseBooks(fp *os.File)  bool{
 	byteValue, _ := ioutil.ReadAll(fp)
 	err := json.Unmarshal(byteValue,&BOOKS)
 	if err!=nil{
 		fmt.Println(err)
-		Failed = true
-	}else {
+		return false
+	}else{
 		UpdateID()
+		return true
 	}
 }
 func UpdateID()  {
@@ -40,13 +40,13 @@ func UpdateID()  {
 	}
 }
 
-func SetUp() {
+func SetUp() bool{
 	absPath, _ := filepath.Abs("books.json")
 	jsonFile := readFile(absPath) //may err
-	if jsonFile !=nil{
-		parseBooks(jsonFile)
+	if jsonFile!=nil{
+		return parseBooks(jsonFile)
 	}else{
-		os.Exit(1)
+		return false
 	}
 }
 

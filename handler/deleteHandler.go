@@ -1,29 +1,26 @@
 package handler
 
 import (
-	"../data"
 	"../logic"
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
+	"../utils"
+	"github.com/gorilla/mux"
 )
 
 
 func HandleDelete(writer http.ResponseWriter,r *http.Request){
-	if data.Failed{
-		PrintErr(writer,http.StatusInternalServerError,"Error occurred while processing")
+	fmt.Println("Delete Book Endpoint Hit")
+
+	vars:= mux.Vars(r)
+	id :=  vars["id"]
+
+	success, err := logic.DeleteABook(id)
+
+	if !success && err != ""{
+		utils.SendError(writer, 400, err)
+
 	}else{
-		vars:= mux.Vars(r)
-		id :=  vars["id"]
-		failed,found := logic.DeleteABook(id)
-		if failed{
-			PrintErr(writer,http.StatusBadRequest,"Please enter a valid integer as ID")
-		}else if !found{
-			PrintErr(writer,http.StatusBadRequest,"No Book found with id: "+id)
-		}else{
-			writer.WriteHeader(http.StatusOK)
-			n,err := fmt.Fprintf(writer,"Book with id: "+id+" is deleted")
-			HandleFprintf(err,n)
-		}
+		utils.SendText(writer, 200, "Book was successfully deleted")
 	}
 }
