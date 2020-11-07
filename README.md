@@ -1,8 +1,26 @@
 # books API
 
 Created to practice Go programming as starting point.
+
+## Set up
+### Alternative 1
+1. [Install Go](https://golang.org/doc/install)
+2. Clone this repository
+```sh
+git clone https://github.com/ppkgtmm/books-API.git books-api
+```
+3. Go to project directory
+```sh
+cd books-api
+```
+4. Run the application
+```go
+go run main.go
+```
+
+
 <p align="center">
-<img min-height="350" src="https://firebasestorage.googleapis.com/v0/b/shop-f-ba8a0.appspot.com/o/Component%201.png?alt=media&token=47624ca8-dab0-40dc-9ace-2296f6b3cda8" alt="Let's learn golang"/>
+<img width="600px" src="https://firebasestorage.googleapis.com/v0/b/shop-f-ba8a0.appspot.com/o/Component%201.png?alt=media&token=47624ca8-dab0-40dc-9ace-2296f6b3cda8" alt="Let's learn golang"/>
 </p>
 
 ## Data source
@@ -189,6 +207,7 @@ GET http://localhost:8080/id={id}
 | id                        | id of book  | integer |
 
 * id parameter value should be starting from 1
+* book of specified id should exist
 
 ### Sample request
 
@@ -343,7 +362,7 @@ Status: 200 OK
 ```
 * only passed fields will be updated.
 * only non-empty field values after trimming will be updated
-* pages must be starting from 1
+* page count must be starting from 1
 
 ### Delete a book
 
@@ -393,16 +412,5 @@ Status: 200 OK
 - invalid json sent as request body
 - request body size exceed 2 KB
 
-
 500 : error occurred while processing
-
-* error details will be returned
-
-
-
-## How to run
-
-```go
-go run main.go
-```
 
