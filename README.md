@@ -2,6 +2,10 @@
 
 Created to practice Go programming as starting point.
 
+<p align="center">
+<img width="600px" src="https://firebasestorage.googleapis.com/v0/b/shop-f-ba8a0.appspot.com/o/Component%201.png?alt=media&token=47624ca8-dab0-40dc-9ace-2296f6b3cda8" alt="Let's learn golang"/>
+</p>
+
 ## Set up
 ### Alternative 1
 1. [Install Go](https://golang.org/doc/install)
@@ -17,12 +21,28 @@ cd books-api
 ```go
 go run main.go
 ```
-
-
-<p align="center">
-<img width="600px" src="https://firebasestorage.googleapis.com/v0/b/shop-f-ba8a0.appspot.com/o/Component%201.png?alt=media&token=47624ca8-dab0-40dc-9ace-2296f6b3cda8" alt="Let's learn golang"/>
-</p>
-
+### Alternative 2
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) (if not installed)
+2. Clone this repository
+```sh
+git clone https://github.com/ppkgtmm/books-API.git books-api
+```
+3. Go to project directory
+```sh
+cd books-api
+```
+4. Build docker image
+```docker
+docker build . --tag books-api  
+```
+5. Run the application in background using docker container
+```docker
+docker run -p 8080:8080 -d --name books books-api
+```
+6. When done, stop and remove the docker container
+```docker
+docker rm -f books
+```
 ## Data source
 
 original data : https://github.com/benoitvallon/100-best-books/blob/master/books.json
