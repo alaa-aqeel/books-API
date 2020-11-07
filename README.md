@@ -17,16 +17,15 @@ A JSON file with array of book objects as sample shown below.
 
 ```json
 {
-  "books": [
-  {
-    "author": "Chinua Achebe",
-    "language": "English",
-    "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart",
-    "pages": 209,
-    "title": "Things Fall Apart"
-  },
-  ...
-  ]
+    "books": [
+        {
+          "author": "Chinua Achebe",
+          "language": "English",
+          "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart",
+          "pages": 209,
+          "title": "Things Fall Apart"
+        }
+    ]
 }
 ```
 
@@ -41,7 +40,6 @@ GET http://localhost:8080/all
 ```
 
 ### Sample response
-Status : 200 OK
 ```json
 {
     "books": [
@@ -52,8 +50,7 @@ Status : 200 OK
             "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart",
             "pages": 209,
             "title": "Things Fall Apart"
-        },
-        ...
+        }
     ],
     "message": ""
 }
@@ -253,7 +250,7 @@ GET http://localhost:8080/page/min=7&max=70
             "title": "A Doll's House"
         }
     ],
-    "error": ""
+    "message": ""
 }
 ```
 
@@ -270,7 +267,7 @@ POST http://localhost:8080/book
 ```http
 POST http://localhost:8080/book
 ```
-
+#### Request body
 ```
 {
     "author": "Marguerite Yourcenar",
@@ -285,12 +282,15 @@ POST http://localhost:8080/book
 
 ```json
 {
-    "id": 103,
-    "author": "Marguerite Yourcenar",
-    "language": "French",
-    "link": "https://en.wikipedia.org/wiki/Memoirs_of_Hadrian",
-    "pages": 195,
-    "title": "Memoirs of Hadrian"
+    "book": {
+        "id": 101,
+        "author": "Marguerite Yourcenar",
+        "language": "French",
+        "link": "https://en.wikipedia.org/wiki/Memoirs_of_Hadrian",
+        "pages": 195,
+        "title": "Memoirs of Hadrian"
+    },
+    "message": ""
 }
 ```
 
@@ -308,15 +308,15 @@ PATCH http://localhost:8080/id={id}
 | ------------------------ | ----------- | ------- |
 | id                       | id of book  | integer |
 
-* id parameter value should exist in the system
+* book of specified id should exist
 
 ### Sample request
 
 ```http
 PATCH http://localhost:8080/id=103
 ```
-
-```
+#### Request body
+```json
 {
     "language": "English",
     "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart",
@@ -329,15 +329,19 @@ PATCH http://localhost:8080/id=103
 
 ```json
 {
-    "id": 103,
-    "author": "Marguerite Yourcenar",
-    "language": "English",
-    "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart",
-    "pages": 99,
-    "title": "Things fall apart"
+    "book": {
+        "id": 103,
+        "author": "Marguerite Yourcenar",
+        "language": "English",
+        "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart",
+        "pages": 99,
+        "title": "Things fall apart"
+    },
+    "message": ""
 }
 ```
 * only passed fields will be updated.
+* request body fields will be trimmed first
 
 ### Delete a book
 
@@ -351,7 +355,7 @@ DELETE http://localhost:8080/id={id}
 | ------------------------ | ----------- | ------- |
 | id                       | id of book  | integer |
 
-* id parameter value should exist in the system
+* book of specified id should exist
 
 ### Sample request
 
@@ -361,8 +365,10 @@ DELETE http://localhost:8080/id=103
 
 ### Sample response
 
-```
-Book with id: 103 is deleted
+```json
+{
+    "message": "Book was successfully deleted"
+}
 ```
 
 
