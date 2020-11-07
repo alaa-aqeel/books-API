@@ -18,7 +18,7 @@ func HandleDelete(writer http.ResponseWriter,r *http.Request){
 	success, err := logic.DeleteABook(id)
 
 	if !success && err != ""{
-		utils.SendError(writer, 400, err)
+		utils.SendText(writer, 400, err)
 
 	}else{
 		utils.SendText(writer, 200, "Book was successfully deleted")

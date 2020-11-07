@@ -69,14 +69,15 @@ func SendBooks(writer http.ResponseWriter,statusCode int, books template.Books){
 }
 
 func SendBook(writer http.ResponseWriter,statusCode int, book template.Book, errMessage string){
-	single.Book = template.Book{}
+	single.Book = (template.Book{})
 	single.Error = ""
 
 	if errMessage!=""{
 		single.Error = errMessage
 
+	}else{
+		single.Book = book
 	}
-	single.Book = book
 
 	writer.Header().Add("Content-Type", "application/json")
 	writer.WriteHeader(statusCode)

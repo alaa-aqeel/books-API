@@ -34,7 +34,9 @@ func UpdateBook(id string,book template.Book) (template.Book,string){
 			data.BOOKS.Books[ID-1].Link = book.Link
 	
 		}
-		if book.Pages > int64(0){
+		if book.Pages < int64(0){
+			return foundBook, "Book should have at least one page"
+		}else if book.Pages > int64(0){
 			data.BOOKS.Books[ID-1].Pages = book.Pages
 		}
 		

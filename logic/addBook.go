@@ -18,7 +18,7 @@ func AddABook(newBook template.Book) (template.Book,string) {
 		return book,"Book language should not be empty"
 
 	}else if newBook.Pages <= 0 {
-		return book,"Book should have at least a page"
+		return book,"Book should have at least one page"
 
 	}else {
 		newBook.Id = int64(len(data.BOOKS.Books)+1)
