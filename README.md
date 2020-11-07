@@ -40,6 +40,7 @@ GET http://localhost:8080/all
 ```
 
 ### Sample response
+Status: 200 OK
 ```json
 {
     "books": [
@@ -78,7 +79,7 @@ GET http://localhost:8080/title=ALL
 ```
 
 ### Sample response
-
+Status: 200 OK
 ```json
 {
     "books": [
@@ -117,7 +118,7 @@ GET http://localhost:8080/author=po
 ```
 
 ### Sample response
-
+Status: 200 OK
 ```json
 {
     "books": [
@@ -156,7 +157,7 @@ GET http://localhost:8080/lang=norSe
 ```
 
 ### Sample response
-
+Status: 200 OK
 ```json
 {
     "books": [
@@ -196,7 +197,7 @@ GET http://localhost:8080/id=33
 ```
 
 ### Sample response
-
+Status: 200 OK
 ```json
 {
     "book": {
@@ -237,7 +238,7 @@ GET http://localhost:8080/page/min=7&max=70
 ```
 
 ### Sample response
-
+Status: 200 OK
 ```json
 {
     "books": [
@@ -279,7 +280,7 @@ POST http://localhost:8080/book
 ```
 
 ### Sample response
-
+Status: 201 Created
 ```json
 {
     "book": {
@@ -326,7 +327,7 @@ PATCH http://localhost:8080/id=103
 ```
 
 ### Sample response
-
+Status: 200 OK
 ```json
 {
     "book": {
@@ -364,7 +365,7 @@ DELETE http://localhost:8080/id=103
 ```
 
 ### Sample response
-
+Status: 200 OK
 ```json
 {
     "message": "Book was successfully deleted"
