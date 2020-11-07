@@ -268,8 +268,8 @@ POST http://localhost:8080/book
 ```http
 POST http://localhost:8080/book
 ```
-#### Request body
-```
+##### Request body
+```json
 {
     "author": "Marguerite Yourcenar",
     "language": "French",
@@ -316,7 +316,7 @@ PATCH http://localhost:8080/id={id}
 ```http
 PATCH http://localhost:8080/id=103
 ```
-#### Request body
+##### Request body
 ```json
 {
     "language": "English",
@@ -342,7 +342,8 @@ Status: 200 OK
 }
 ```
 * only passed fields will be updated.
-* request body fields will be trimmed first
+* only non-empty field values after trimming will be updated
+* pages must be starting from 1
 
 ### Delete a book
 
@@ -376,17 +377,22 @@ Status: 200 OK
 
 ## Status code
 
-200 : no error occurred
+200 : request e.g. get books, update book and delete book successfully processed
 
 201 : new book created
 
 400 : bad input 
 
-- non-integer book ID
-- negative number or zero entered as book ID
-- invalid number of pages for page range
-- minimum page number exceed maximum page number
-- book id does not exist
+- non-integer entered as book id
+- book id is less than one
+- book with specified id does not exist
+- page count is non-integer value
+- page count is less than one
+- minimum page count exceed maximum page count
+- one of required fileds (all except link of book) is not specified when creating
+- invalid json sent as request body
+- request body size exceed 2 KB
+
 
 500 : error occurred while processing
 
