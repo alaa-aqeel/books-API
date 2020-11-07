@@ -7,6 +7,7 @@ import (
 )
 
 func FindByPageRange(min string,max string) (template.Books,string){
+
 	var foundBooks template.Books
 	foundBooks.Books = make([]template.Book, 0)
 	
@@ -24,10 +25,14 @@ func FindByPageRange(min string,max string) (template.Books,string){
 		
 	}else {
 		for i := 0; i < len(data.BOOKS.Books); i++ {
+
 			book := data.BOOKS.Books[i]
 
-			if book != (template.Book{}) && book.Pages>=minPage && book.Pages<=maxPage {
+			if  book != (template.Book{}) && 
+				book.Pages>=minPage && 
+				book.Pages<=maxPage {
 				foundBooks.Books = append(foundBooks.Books, book)
+				
 			}
 		}
 	}

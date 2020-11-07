@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-// careful empty array return
 
 func FindByID(id string) (template.Book,string) {
+
 	var foundBook template.Book
 
 	ID,err := strconv.ParseInt(strings.TrimSpace(id), 10, 64)
@@ -27,5 +27,6 @@ func FindByID(id string) (template.Book,string) {
 
 	}else{
 		return data.BOOKS.Books[ID-1],""
+		
 	}
 }

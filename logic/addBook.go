@@ -7,7 +7,9 @@ import (
 )
 
 func AddABook(newBook template.Book) (template.Book,string) {
+
 	var book template.Book
+	
 	if strings.TrimSpace(newBook.Title) == "" {
 		return book,"Book title should not be empty"
 
@@ -25,6 +27,7 @@ func AddABook(newBook template.Book) (template.Book,string) {
 		data.BOOKS.Books = append(data.BOOKS.Books,newBook)
 		
 		return data.BOOKS.Books[len(data.BOOKS.Books)-1],""
+		
 	}
 
 }

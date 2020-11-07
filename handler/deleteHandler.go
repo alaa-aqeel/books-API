@@ -10,6 +10,7 @@ import (
 
 
 func HandleDelete(writer http.ResponseWriter,r *http.Request){
+
 	fmt.Println("Delete Book Endpoint Hit")
 
 	vars:= mux.Vars(r)
@@ -22,5 +23,6 @@ func HandleDelete(writer http.ResponseWriter,r *http.Request){
 
 	}else{
 		utils.SendText(writer, 200, "Book was successfully deleted")
+			
 	}
 }

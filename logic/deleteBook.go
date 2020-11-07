@@ -9,8 +9,10 @@ import (
 )
 
 func DeleteABook(id string) (bool,string) {
+
 	ID,err := strconv.ParseInt(strings.TrimSpace(id), 10, 64)
 	var emptyBook template.Book
+
 	if err!=nil{
 		fmt.Println(err)
 		return false, "Book ID should be an integer"
@@ -21,6 +23,7 @@ func DeleteABook(id string) (bool,string) {
 
 	}else{
 		return false,  "No book exist for the ID"
+		
 	}
 	
 }

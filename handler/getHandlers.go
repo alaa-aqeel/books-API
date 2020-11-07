@@ -10,18 +10,24 @@ import (
 )
 
 func AllBooks(writer http.ResponseWriter,r *http.Request)  {
+
 	fmt.Println("All Books Endpoint Hit")
 	utils.SendBooks(writer, 200, data.BOOKS)
+
 }
 
 func HandleHome(writer http.ResponseWriter,r *http.Request) {
+
 	_, err := fmt.Fprintf(writer,"Homepage")
+
 	if err!=nil{
 		fmt.Println(err)
+
 	}
 }
 
 func HandleByTitle(writer http.ResponseWriter,r *http.Request)  {
+
 	fmt.Println("Search By Title Endpoint Hit")
 
 	vars := mux.Vars(r)
@@ -32,6 +38,7 @@ func HandleByTitle(writer http.ResponseWriter,r *http.Request)  {
 }
 
 func HandleByAuthor(writer http.ResponseWriter,r *http.Request)  {
+
 	fmt.Println("Search By Author Endpoint Hit")
 
 	vars := mux.Vars(r)
@@ -42,6 +49,7 @@ func HandleByAuthor(writer http.ResponseWriter,r *http.Request)  {
 }
 
 func HandleByPageRange(writer http.ResponseWriter,r *http.Request)  {
+
 	fmt.Println("Search By Page Range Endpoint Hit")
 
 	vars := mux.Vars(r)
@@ -54,11 +62,13 @@ func HandleByPageRange(writer http.ResponseWriter,r *http.Request)  {
 
 	}else {
 		utils.SendBooks(writer, 200, foundBooks)
+
 	}
 
 }
 
 func HandleByLanguage(writer http.ResponseWriter,r *http.Request){
+
 	fmt.Println("Search By Language Endpoint Hit")
 
 	vars:= mux.Vars(r)
@@ -69,6 +79,7 @@ func HandleByLanguage(writer http.ResponseWriter,r *http.Request){
 }
 
 func HandleByID(writer http.ResponseWriter,r *http.Request)  {
+
 	fmt.Println("Search By ID Endpoint Hit")
 
 	vars:= mux.Vars(r)
@@ -82,6 +93,7 @@ func HandleByID(writer http.ResponseWriter,r *http.Request)  {
 
 	}else{
 		utils.SendBook(writer, 200, book, err)
+		
 	}
 	
 }

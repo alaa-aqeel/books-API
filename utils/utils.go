@@ -11,11 +11,14 @@ var response template.Response
 var single template.SingleResponse
 
 func clearResponse()  {
+
 	response.Books = make([]template.Book, 0)
 	response.Error = ""
+
 }
 
 func SendText(writer http.ResponseWriter,statusCode int, message string){
+
 	writer.Header().Add("Content-Type", "application/json")
 	writer.WriteHeader(statusCode)
 
@@ -24,10 +27,12 @@ func SendText(writer http.ResponseWriter,statusCode int, message string){
 	
 	if err != nil{
 		fmt.Println(err)
+
 	}
 }
 
 func SendError(writer http.ResponseWriter,statusCode int, errMessage string){
+
 	clearResponse()
 	response.Error = errMessage
 
@@ -44,11 +49,13 @@ func SendError(writer http.ResponseWriter,statusCode int, errMessage string){
 		_,err := writer.Write(toSend)
 		if err != nil{
 			fmt.Println(err)
+
 		}
 	}
 }
 
 func SendBooks(writer http.ResponseWriter,statusCode int, books template.Books){
+
 	clearResponse()
 	response.Books = books.Books
 
@@ -60,15 +67,18 @@ func SendBooks(writer http.ResponseWriter,statusCode int, books template.Books){
 	if err!=nil{
 		fmt.Println(err)
 		SendError(writer, 500, "Error occurred while processing")
+
 	}else{
 		_,err := writer.Write(toSend)
 		if err != nil{
 			fmt.Println(err)
+
 		}
 	}
 }
 
 func SendBook(writer http.ResponseWriter,statusCode int, book template.Book, errMessage string){
+
 	single.Book = (template.Book{})
 	single.Error = ""
 
@@ -77,6 +87,7 @@ func SendBook(writer http.ResponseWriter,statusCode int, book template.Book, err
 
 	}else{
 		single.Book = book
+
 	}
 
 	writer.Header().Add("Content-Type", "application/json")
@@ -93,6 +104,7 @@ func SendBook(writer http.ResponseWriter,statusCode int, book template.Book, err
 
 		if err != nil{
 			fmt.Println(err)
+			
 		}
 	}
 }

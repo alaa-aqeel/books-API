@@ -10,6 +10,7 @@ import (
 )
 
 func HandlePost(writer http.ResponseWriter,r *http.Request) {
+
 	fmt.Println("Add Book Endpoint Hit")
 
 	var newBook template.Book
@@ -22,6 +23,7 @@ func HandlePost(writer http.ResponseWriter,r *http.Request) {
 
 	}else{
 			err := json.Unmarshal(reqBody,&newBook)
+
 			if err!=nil{
 				utils.SendBook(writer, 400, newBook, "Invalid request body passed")
 
@@ -32,6 +34,7 @@ func HandlePost(writer http.ResponseWriter,r *http.Request) {
 	
 				}else{
 					utils.SendBook(writer, 201, book, message)
+					
 				}
 			}
 

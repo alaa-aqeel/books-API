@@ -10,6 +10,7 @@ import (
 )
 
 func handleRequest()  {
+
 	myRouter := mux.NewRouter().StrictSlash(true)
 	
 	myRouter.HandleFunc("/",handler.HandleHome).Methods("GET")
@@ -29,10 +30,14 @@ func handleRequest()  {
 	log.Fatal(http.ListenAndServe(":8080",myRouter)) // run server
 
 }
+
 func main() {
+
 	if data.SetUp(){
 		handleRequest()
+
 	}else{
 		os.Exit(1)
+		
 	}
 }
