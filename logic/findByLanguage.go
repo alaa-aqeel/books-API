@@ -15,7 +15,7 @@ func FindByLanguage(keyword string) template.Books {
 		book:= data.BOOKS.Books[i]
 
 		if book != (template.Book{}) && 
-		strings.Contains(strings.ToUpper(book.Language),strings.ToUpper(keyword)){
+			strings.Contains(strings.ToUpper(book.Language),strings.ToUpper(keyword)){
 
 			foundBooks.Books = append(foundBooks.Books,book)
 			
