@@ -2,7 +2,7 @@
 
 Created to practice Go programming as starting point.
 <p align="center">
-<img height="450" src="https://firebasestorage.googleapis.com/v0/b/shop-f-ba8a0.appspot.com/o/Component%201.png?alt=media&token=47624ca8-dab0-40dc-9ace-2296f6b3cda8" alt="Go Go Go"/>
+<img min-height="350" src="https://firebasestorage.googleapis.com/v0/b/shop-f-ba8a0.appspot.com/o/Component%201.png?alt=media&token=47624ca8-dab0-40dc-9ace-2296f6b3cda8" alt="Let's learn golang"/>
 </p>
 
 ## Data source
@@ -24,7 +24,8 @@ A JSON file with array of book objects as sample shown below.
     "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart",
     "pages": 209,
     "title": "Things Fall Apart"
-  }
+  },
+  ...
   ]
 }
 ```
@@ -40,7 +41,7 @@ GET http://localhost:8080/all
 ```
 
 ### Sample response
-
+Status : 200 OK
 ```json
 {
     "books": [
@@ -52,16 +53,9 @@ GET http://localhost:8080/all
             "pages": 209,
             "title": "Things Fall Apart"
         },
-        {
-            "id": 3,
-            "author": "Dante Alighieri",
-            "language": "Italian",
-            "link": "https://en.wikipedia.org/wiki/Divine_Comedy",
-            "pages": 928,
-            "title": "The Divine Comedy"
-        }
+        ...
     ],
-    "error": ""
+    "message": ""
 }
 ```
 
