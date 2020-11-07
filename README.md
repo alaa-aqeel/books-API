@@ -73,12 +73,11 @@ GET http://localhost:8080/title={title}
 | ------------------------ | ------------------- | ------ |
 | title                    | part of  book title | String |
 
-* ordering of letters in parameter value should be same as the book title
 
 ### Sample request
 
 ```http
-GET http://localhost:8080/title=Al
+GET http://localhost:8080/title=ALL
 ```
 
 ### Sample response
@@ -95,7 +94,7 @@ GET http://localhost:8080/title=Al
             "title": "Things Fall Apart"
         }
     ],
-    "error": ""
+    "message": ""
 }
 ```
 
@@ -113,7 +112,6 @@ GET http://localhost:8080/author={author}
 | ------------------------ | -------------------------- | ------ |
 | author                   | part of book's author name | String |
 
-* ordering of letters in parameter value should be same as the book's author name
 
 ### Sample request
 
@@ -135,7 +133,7 @@ GET http://localhost:8080/author=po
             "title": "Tales"
         }
     ],
-    "error": ""
+    "message": ""
 }
 ```
 
@@ -153,7 +151,6 @@ GET http://localhost:8080/lang={language}
 | ------------------------- | ---------------- | ------ |
 | lang                      | part of book language | String |
 
-* ordering of letters in parameter value should be same as the book language
 
 ### Sample request
 
@@ -175,7 +172,7 @@ GET http://localhost:8080/lang=norSe
             "title": "Njál's Saga"
         }
     ],
-    "error": ""
+   "message": ""
 }
 ```
 
@@ -205,17 +202,15 @@ GET http://localhost:8080/id=33
 
 ```json
 {
-    "books": [
-        {
+    "book": {
             "id": 33,
             "author": "Gustave Flaubert",
             "language": "French",
             "link": "https://en.wikipedia.org/wiki/Madame_Bovary",
             "pages": 528,
             "title": "Madame Bovary"
-        }
-    ],
-    "error": ""
+        },
+    "message": ""
 }
 ```
 
