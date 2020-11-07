@@ -2,7 +2,7 @@
 
 Created to practice Go programming as starting point.
 <p align="center">
-<img height="450" src="https://miro.medium.com/max/3000/1*30aoNxlSnaYrLhBT0O1lzw.png" alt="Go Go Go"/>
+<img height="450" src="https://firebasestorage.googleapis.com/v0/b/shop-f-ba8a0.appspot.com/o/Component%201.png?alt=media&token=47624ca8-dab0-40dc-9ace-2296f6b3cda8" alt="Go Go Go"/>
 </p>
 
 ## Data source
